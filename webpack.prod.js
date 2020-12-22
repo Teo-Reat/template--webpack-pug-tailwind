@@ -27,8 +27,9 @@ module.exports = merge(common, {
 				}
 			}),
 			new HtmlWebpackPlugin({
-				template: "./src/template/template.html",
+				template: "./src/template/template.pug",
 				filename: 'index.html',
+				inject: true
 			}),
 		]
 	},
@@ -41,8 +42,8 @@ module.exports = merge(common, {
 			{
 				test: /\.css$/,
 				use: [
-					MiniCssExtractPlugin.loader, //3. Extract css into files
-					"css-loader", //2. Turns css into commonjs
+					MiniCssExtractPlugin.loader, // Extract css into files
+					{ loader: "css-loader", options: { importLoaders: 1 } },
 					"postcss-loader",
 				]
 			}

@@ -11,7 +11,7 @@ module.exports = merge(common, {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "./src/template/template.html"
+			template: "./src/template/template.pug"
 		}),
 	],
 	module: {
@@ -19,10 +19,16 @@ module.exports = merge(common, {
 			{
 				test: /\.css$/,
 				use: [
-					"style-loader", //3. Inject styles into DOM
-					"css-loader", //2. Turns css into commonjs
+					"style-loader",
+					{ loader: "css-loader", options: { importLoaders: 1 } },
+					"postcss-loader",
 				]
 			}
 		]
-	}
+	},
+	devServer: {
+		watchContentBase: true,
+		contentBase: path.resolve(__dirname, "dist"),
+		open: true,
+	},
 });

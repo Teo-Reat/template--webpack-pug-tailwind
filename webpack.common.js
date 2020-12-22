@@ -1,5 +1,5 @@
-let path = require("path");
-let HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -24,6 +24,10 @@ module.exports = {
 			{
 				test: /\.html$/,
 				use: ["html-loader"]
+			},
+			{
+				test: /\.pug$/,
+				loader: 'pug-loader'
 			},
 			{
 				test: /\.(svg|png|jpg|gif)$/,
